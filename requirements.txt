@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 flask
 pandas
 numpy
@@ -6,3 +7,13 @@ joblib
 matplotlib
 plotly
 gunicorn
+=======
+flask
+pandas
+numpy
+scikit-learn
+joblib
+matplotlib
+plotly
+gunicorn
+>>>>>>> 5a869b65e77959ec4059a816cd2e0997a6b28ab5

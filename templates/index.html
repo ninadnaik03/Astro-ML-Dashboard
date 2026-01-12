@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,3 +131,138 @@
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Astro Data Analysis Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">🔭</div>
+        <h1>Astro Data Analysis Dashboard</h1>
+        <p>Uncertainty-aware photometric classification & visualization</p>
+    </header>
+
+    <!-- UPLOAD -->
+    <section class="upload-card">
+        <form method="POST" enctype="multipart/form-data">
+
+            <label class="file-upload">
+                <input type="file" name="csv_file" accept=".csv">
+                <span>📂 Choose CSV File</span>
+            </label>
+
+            <button type="submit" name="action" value="upload">
+                Upload CSV
+            </button>
+
+            <button type="submit" name="action" value="sample" class="secondary">
+                Use Sample Dataset
+            </button>
+
+        </form>
+
+        <p class="hint">
+            CSV should contain photometric bands (<code>u g r i z</code>)  
+            or color indices (<code>u_g g_r r_i i_z</code>)
+        </p>
+    </section>
+
+    <!-- STATUS -->
+    {% if validation_message %}
+    <div class="validation {{ validation_status }}">
+        {{ validation_message }}
+    </div>
+    {% endif %}
+
+    <!-- STATS -->
+    <section class="stats">
+
+        <div class="stat-card">
+            <h3>Total Objects</h3>
+            <p>{{ total_objects if total_objects else "—" }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Mean Confidence</h3>
+            <p>
+                {% if mean_confidence is not none %}
+                    {{ mean_confidence }}
+                {% else %}
+                    —
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Ambiguous Objects</h3>
+            <p>
+                {% if ambiguous_percent is not none %}
+                    {{ ambiguous_percent }} %
+                {% else %}
+                    —
+                {% endif %}
+            </p>
+        </div>
+
+    </section>
+
+    <!-- CLASS DISTRIBUTION -->
+    {% if class_distribution %}
+    <section class="stats">
+        <div class="stat-card wide">
+            <h3>Predicted Class Distribution</h3>
+            <ul class="class-list">
+                {% for cls, count in class_distribution.items() %}
+                    <li><strong>{{ cls }}</strong>: {{ count }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- VISUALS -->
+    {% if plot_ready %}
+    <section class="visuals">
+        <h2>📊 Scientific Visualizations</h2>
+
+        <div class="viz">
+            <h3>u − g vs g − r</h3>
+            <img src="{{ url_for('static', filename='ug_gr_scatter.png') }}">
+        </div>
+
+        <div class="viz">
+            <h3>Color–Color Matrix</h3>
+            <img src="{{ url_for('static', filename='color_color_matrix.png') }}">
+        </div>
+
+        <div class="viz">
+            <h3>Color Distributions</h3>
+            <img src="{{ url_for('static', filename='color_histograms.png') }}">
+        </div>
+
+        <div class="viz">
+            <h3>Interactive 2D Color Space (ML)</h3>
+            {{ plotly_html | safe }}
+        </div>
+
+        <div class="viz">
+            <h3>3D Color Space (ML)</h3>
+            {{ plotly_3d_html | safe }}
+        </div>
+    </section>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
+>>>>>>> 5a869b65e77959ec4059a816cd2e0997a6b28ab5

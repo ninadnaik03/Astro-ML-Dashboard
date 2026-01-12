@@ -1,19 +1,11 @@
 <<<<<<< HEAD
-flask
-pandas
-numpy
-scikit-learn
-joblib
-matplotlib
-plotly
-gunicorn
-=======
-flask
-pandas
-numpy
-scikit-learn
-joblib
-matplotlib
-plotly
-gunicorn
+flask==3.0.0
+gunicorn==21.2.0
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.4.2
+joblib==1.4.2
+matplotlib==3.8.4
+plotly==5.20.0
+
 >>>>>>> 5a869b65e77959ec4059a816cd2e0997a6b28ab5
